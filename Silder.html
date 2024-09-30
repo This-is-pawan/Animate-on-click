@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .slider {
+            top: 30px;
+            display: flex;
+            border-radius: 30px;
+            justify-content: center;
+            width: 80vw;
+            max-width: 400px;
+            box-shadow: 1px 1px 5px rgb(148, 57, 72);
+            overflow: hidden;
+            position: relative;
+            height: 450px;
+            margin: auto;
+
+
+        }
+
+        .slide {
+            transition: all 2s ease;
+            display: flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+
+        }
+
+        .first {
+            transition: all 2s ease;
+            width: 400px;
+            height: 500px;
+        }
+
+        .first:nth-child(1) {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./about-img.jpeg') center / cover no-repeat;
+        }
+
+        .first:nth-child(2) {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./perosn4.jpg') center / cover no-repeat;
+        }
+
+        .first:nth-child(3) {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./person2.jpg') center / cover no-repeat;
+        }
+
+        .first:nth-child(4) {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./person3.jpg') center / cover no-repeat;
+        }
+
+        .first:nth-child(5) {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./person1.jpg') center / cover no-repeat;
+            /* width: 100%; */
+        }
+
+        .first:nth-child(6) {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./person2.jpg') center / cover no-repeat;
+            /* width: 100%; */
+        }
+
+
+        li {
+            list-style-type: none;
+        }
+
+        .per {
+            position: relative;
+            bottom: 25px;
+
+        }
+
+        .list {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .list li {
+            margin: 5px;
+            background-color: rgb(239, 239, 248);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .list .active {
+            background: white;
+            opacity: 0.4;
+            border-radius: 20px;
+            width: 40px;
+            height: 10px;
+        }
+
+        .btn_container {
+            position: relative;
+            bottom: 10rem;
+            margin: 0 30px;
+        }
+
+        .btn button {
+            cursor: pointer;
+            border: none;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 5px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .btn {
+            display: flex;
+            justify-content: center;
+            justify-content: space-around;
+
+        }
+
+        @media screen and (min-width:900px) {
+
+            .slider {
+                width: 150vw;
+                max-width: 800px;
+            }
+
+            .first:nth-child(6) {
+                width: 800px;
+                position: relative;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="conatiner">
+
+        <div class="slider">
+
+            <div class="slide">
+                <article class="first">
+
+                </article>
+                <article class="first">
+
+                </article>
+                <article class="first">
+
+                </article>
+                <article class="first">
+
+                </article>
+                <article class="first">
+
+                </article>
+                <article class="first">
+
+                </article>
+
+            </div>
+
+        </div>
+        <div class="btn_container">
+            <div class="btn">
+                <button class="btn1">
+                    < </button>
+                        <button class="btn2"> > </button>
+            </div>
+        </div>
+        <div class="per">
+            <div class="list">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    const first = document.querySelectorAll('.first');
+    const btn1 = document.querySelector('.btn1');
+    const btn2 = document.querySelector('.btn2');
+    const slide = document.querySelector('.slide');
+    const slider = document.querySelector('.slider');
+
+    const Active = document.querySelectorAll('li');
+    count = 0;
+    window.addEventListener('DOMContentLoaded', () => {
+        load()
+    });
+
+    function load() {
+        
+    
+    btn1.addEventListener('click', () => {
+        if (count < first.length - 1) {
+            count++
+        } else {
+            count = 0;
+        }
+        reload()
+
+    });
+    btn2.addEventListener('click', () => {
+        if (count > 0) {
+            count--;
+        } else {
+            count = first.length - 1;
+        }
+
+        reload()
+    });
+
+    function reload() {
+
+        const active = document.querySelector('.per li.active');
+
+        slide.style.left = -first[count].offsetLeft + 'px';
+        active.classList.remove('active');
+        Active[count].classList.add('active');
+
+        
+    }
+    Active.forEach((list, index) => {
+            list.addEventListener('click', () => {
+                count = index;
+                reload()
+            })
+        })
+    }
+
+
+
+</script>
+
+</html>
